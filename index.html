@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống thi trắc nghiệm - Tiểu đoàn BVMT và BVHĐB</title>
+    <style>
+        /* Cấu hình chung */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            /* Nền xanh đậm và hiệu ứng lưới ô vuông */
+            background-color: #0b1a30;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Khung chứa chính */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Phần Header (Tiêu đề) */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #ffcc00;
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header h2 {
+            color: #ffcc00;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .header h3 {
+            color: #ffcc00;
+            font-size: 20px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        /* Logo (Bạn có thể thay thế bằng hình ảnh thật của đơn vị) */
+        .logo-container {
+            margin-bottom: 20px;
+        }
+        
+        .logo-container img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.5));
+        }
+
+        /* Khung Form */
+        .form-wrapper {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(13, 34, 64, 0.85); /* Xanh đậm trong suốt */
+            border: 1px solid #3a6b9c; /* Viền xanh nhạt */
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .form-title {
+            color: #ffcc00;
+            text-align: center;
+            font-size: 22px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* Các trường nhập liệu */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffcc00;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(20, 45, 80, 0.5);
+            border: 1px solid #3a6b9c;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #8899aa;
+        }
+
+        .form-group input:focus {
+            border-color: #ffcc00;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+            background-color: rgba(20, 45, 80, 0.8);
+        }
+
+        /* Nút bấm */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .btn-start {
+            background-color: #ffcc00;
+            color: #000000;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 0 #b38f00;
+        }
+
+        .btn-start:hover {
+            background-color: #ffdb4d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #b38f00;
+        }
+
+        .btn-start:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #b38f00;
+        }
+
+        .btn-report {
+            background-color: transparent;
+            color: #ffcc00;
+            border: 1px solid #ffcc00;
+        }
+
+        .btn-report:hover {
+            background-color: rgba(255, 204, 0, 0.1);
+        }
+
+        /* Responsive cho điện thoại */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 24px; }
+            .header h2 { font-size: 18px; }
+            .header h3 { font-size: 16px; }
+            .form-wrapper { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Phần Tiêu Đề -->
+        <header class="header">
+            <h1>TIỂU ĐOÀN BVMT VÀ BVHĐB</h1>
+            <h2>TRUNG ĐOÀN CSCĐ SỐ 8</h2>
+            <h3>BỘ TƯ LỆNH CẢNH SÁT CƠ ĐỘNG</h3>
+            
+            <!-- Logo: Tôi để một logo CSGT/CSCĐ mẫu, bạn hãy thay đường dẫn ảnh (src) bằng logo thật của đơn vị mình -->
+            <div class="logo-container">
+                <img src="logo.png">
+            </div>
+        </header>
+
+        <!-- Phần Form Nhập Liệu -->
+        <div class="form-wrapper">
+            <div class="form-title">THÔNG TIN NGƯỜI DỰ THI</div>
+            
+            <form id="examForm" onsubmit="startExam(event)">
+                <div class="form-group">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" id="fullname" placeholder="Nhập họ và tên" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="unit">Đơn vị</label>
+                    <input type="text" id="unit" placeholder="Nhập đơn vị" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+                </div>
+
+                <button type="submit" class="btn btn-start">BẮT ĐẦU THI</button>
+                <button type="button" class="btn btn-report" onclick="reportResult()">BÁO CÁO KẾT QUẢ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script xử lý logic cơ bản -->
+    <script>
+        function startExam(event) {
+            event.preventDefault(); // Ngăn chặn load lại trang
+            
+            // Lấy dữ liệu người dùng nhập
+            const name = document.getElementById('fullname').value;
+            const unit = document.getElementById('unit').value;
+            const phone = document.getElementById('phone').value;
+
+            // Hiển thị thông báo (Trong thực tế bạn sẽ chuyển hướng sang trang làm bài thi)
+            alert(`Xin chào thí sinh: ${name}\nĐơn vị: ${unit}\nSĐT: ${phone}\n\nHệ thống đang chuẩn bị đề thi...`);
+            
+            // Ví dụ: window.location.href = "trang_lam_bai.html";
+        }
+
+        function reportResult() {
+            alert("Chức năng báo cáo kết quả đang được xây dựng!");
+        }
+    </script>
+</body>
+</html>
