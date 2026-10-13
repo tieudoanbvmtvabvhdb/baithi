@@ -544,7 +544,9 @@
             else if (percentage >= 50) message = "Khá tốt! Hãy cố gắng thêm ở lần sau.";
             else message = "Cần cố gắng nhiều hơn. Hãy ôn tập lại nhé!";
             
-            document.getElementById('final-message').innerText = message;
+            document.getElementById('final-message').innerHTML = 
+                `Chúc mừng Đồng chí <strong style="color: #ffcc00; font-size: 22px;">${name}</strong> đã hoàn thành bài thi!<br><br>` +
+                `<span style="color: #e0e0e0;">${message}</span>`;
         }
     </script>
 </body>
