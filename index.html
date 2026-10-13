@@ -6,181 +6,113 @@
     <title>Hệ thống thi trắc nghiệm - Tiểu đoàn BVMT và BVHĐB</title>
     <style>
         /* Cấu hình chung */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; }
         body {
-            /* Nền xanh đậm và hiệu ứng lưới ô vuông */
             background-color: #0b1a30;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            color: #ffffff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
         }
-
-        /* Khung chứa chính */
-        .container {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Phần Header (Tiêu đề) */
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #ffcc00;
-            font-size: 32px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .header h2 {
-            color: #ffcc00;
-            font-size: 24px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
+        .container { width: 100%; max-width: 800px; display: flex; flex-direction: column; align-items: center; }
         
-        .header h3 {
-            color: #ffcc00;
-            font-size: 20px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        /* Logo (Bạn có thể thay thế bằng hình ảnh thật của đơn vị) */
-        .logo-container {
-            margin-bottom: 20px;
-        }
+        /* HEADER (TIÊU ĐỀ) */
+        .header { text-align: center; margin-bottom: 25px; }
+        .header h1 { color: #ffcc00; font-size: 28px; text-transform: uppercase; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); letter-spacing: 1px; }
+        .header h2 { color: #ffcc00; font-size: 22px; text-transform: uppercase; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
+        .header h3 { color: #ffffff; font-size: 26px; text-transform: uppercase; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); font-weight: bold; }
         
-        .logo-container img {
-            width: 120px;
-            height: auto;
-            filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.5));
-        }
+        .logo-container img { width: 100px; height: auto; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.8)); }
 
-        /* Khung Form */
-        .form-wrapper {
-            width: 100%;
-            max-width: 500px;
-            background-color: rgba(13, 34, 64, 0.85); /* Xanh đậm trong suốt */
-            border: 1px solid #3a6b9c; /* Viền xanh nhạt */
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
+        /* KHUNG CHUNG */
+        .box-wrapper {
+            width: 100%; max-width: 650px; background-color: rgba(13, 34, 64, 0.9); border: 1px solid #3a6b9c;
+            border-radius: 12px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(8px);
         }
+        .box-title { color: #ffcc00; text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 25px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
 
-        .form-title {
-            color: #ffcc00;
-            text-align: center;
-            font-size: 22px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-            font-weight: bold;
+        /* FORM NHẬP LIỆU */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #ffcc00; font-size: 16px; margin-bottom: 8px; font-weight: bold; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px 15px; background-color: rgba(20, 45, 80, 0.6); border: 1px solid #3a6b9c;
+            border-radius: 8px; color: #ffffff; font-size: 16px; outline: none; transition: all 0.3s ease; font-family: Arial, sans-serif;
         }
+        .form-group select option { background-color: #0b1a30; color: #ffffff; padding: 10px; }
+        .form-group input:focus, .form-group select:focus { border-color: #ffcc00; box-shadow: 0 0 10px rgba(255, 204, 0, 0.4); background-color: rgba(20, 45, 80, 0.9); }
 
-        /* Các trường nhập liệu */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #ffcc00;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: rgba(20, 45, 80, 0.5);
-            border: 1px solid #3a6b9c;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input::placeholder {
-            color: #8899aa;
-        }
-
-        .form-group input:focus {
-            border-color: #ffcc00;
-            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
-            background-color: rgba(20, 45, 80, 0.8);
-        }
-
-        /* Nút bấm */
+        /* NÚT BẤM */
         .btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Times New Roman', Times, serif;
+            width: 100%; padding: 15px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; font-family: 'Times New Roman', Times, serif; letter-spacing: 1px;
+        }
+        .btn-start { background-color: #ffcc00; color: #000000; box-shadow: 0 4px 0 #b38f00; }
+        .btn-start:hover { background-color: #ffdb4d; transform: translateY(-2px); box-shadow: 0 6px 0 #b38f00; }
+        .btn-start:active { transform: translateY(2px); box-shadow: 0 2px 0 #b38f00; }
+        
+        /* CSS nút khi bị khóa (đã chuyển xuống đây cho gọn) */
+        .btn-start:disabled {
+            background-color: #8a7300;
+            color: #333;
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
         }
 
-        .btn-start {
-            background-color: #ffcc00;
-            color: #000000;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 0 #b38f00;
+        /* GIAO DIỆN LÀM BÀI THI */
+        .quiz-header { 
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+            margin-bottom: 25px; border-bottom: 2px solid rgba(255, 204, 0, 0.3); padding-bottom: 15px; 
         }
+        .quiz-header span { 
+            color: #ffcc00; font-size: 16px; font-weight: bold; background: rgba(255, 204, 0, 0.1);
+            padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255, 204, 0, 0.2);
+        }
+        
+        .question-text { font-size: 19px; line-height: 1.6; margin-bottom: 25px; color: #e0e0e0; font-weight: 500; }
+        
+        /* CÁC ĐÁP ÁN */
+        .option-label {
+            display: flex; align-items: flex-start; background-color: rgba(20, 45, 80, 0.5); border: 1px solid #3a6b9c;
+            border-radius: 8px; padding: 15px 20px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease; font-size: 17px; line-height: 1.5;
+        }
+        .option-label:hover { background-color: rgba(58, 107, 156, 0.7); border-color: #5a9bd6; transform: translateX(5px); }
+        .option-label input {
+            margin-right: 15px; margin-top: 4px; transform: scale(1.4); accent-color: #ffcc00; cursor: pointer; flex-shrink: 0;
+        }
+        .option-label.selected { 
+            background-color: rgba(58, 107, 156, 0.9); border-color: #ffcc00; box-shadow: 0 0 12px rgba(255, 204, 0, 0.3); 
+        }
+        .option-label.correct-answer {
+            background-color: rgba(40, 167, 69, 0.4) !important;
+            border-color: #28a745 !important;
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+            transform: translateX(5px);
+        }
+        .option-label.wrong-answer {
+            background-color: rgba(220, 53, 69, 0.4) !important;
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 15px rgba(220, 53, 69, 0.6);
+            transform: translateX(5px);
+        }
+        .option-label input:disabled { cursor: not-allowed; }
+        .option-label.locked { cursor: not-allowed; }
 
-        .btn-start:hover {
-            background-color: #ffdb4d;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #b38f00;
-        }
+        /* KẾT QUẢ */
+        .result-score { font-size: 52px; color: #ffcc00; text-align: center; margin: 20px 0; font-weight: bold; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
+        .result-text { font-size: 20px; text-align: center; margin-bottom: 30px; line-height: 1.5; }
 
-        .btn-start:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #b38f00;
-        }
-
-        .btn-report {
-            background-color: transparent;
-            color: #ffcc00;
-            border: 1px solid #ffcc00;
-        }
-
-        .btn-report:hover {
-            background-color: rgba(255, 204, 0, 0.1);
-        }
+        .hidden { display: none !important; }
 
         /* Responsive cho điện thoại */
         @media (max-width: 600px) {
-            .header h1 { font-size: 24px; }
-            .header h2 { font-size: 18px; }
-            .header h3 { font-size: 16px; }
-            .form-wrapper { padding: 20px; }
+            .header h1 { font-size: 20px; }
+            .header h2 { font-size: 16px; }
+            .header h3 { font-size: 18px; }
+            .box-wrapper { padding: 20px; }
+            .quiz-header { flex-direction: column; align-items: flex-start; }
+            .quiz-header span { width: 100%; text-align: center; }
+            .question-text { font-size: 17px; }
+            .option-label { font-size: 15px; padding: 12px; }
         }
     </style>
 </head>
@@ -189,60 +121,430 @@
     <div class="container">
         <!-- Phần Tiêu Đề -->
         <header class="header">
-            <h1>TIỂU ĐOÀN BVMT VÀ BVHĐB</h1>
-            <h2>TRUNG ĐOÀN CSCĐ SỐ 8</h2>
             <h3>BỘ TƯ LỆNH CẢNH SÁT CƠ ĐỘNG</h3>
+            <h2>TRUNG ĐOÀN CSCĐ SỐ 8</h2>
+            <h1>TIỂU ĐOÀN BVMT VÀ BVHĐB</h1>
             
-            <!-- Logo: Tôi để một logo CSGT/CSCĐ mẫu, bạn hãy thay đường dẫn ảnh (src) bằng logo thật của đơn vị mình -->
             <div class="logo-container">
-                <img src="logo.png" alt="Logo Cảnh sát cơ động">
+                <img src="logo.png" alt="Logo Cảnh sát cơ động" onerror="this.style.display='none'">
             </div>
         </header>
 
-        <!-- Phần Form Nhập Liệu -->
-        <div class="form-wrapper">
-            <div class="form-title">THÔNG TIN NGƯỜI DỰ THI</div>
-            
+        <!-- MÀN HÌNH 1: ĐĂNG NHẬP -->
+        <div id="login-screen" class="box-wrapper">
+            <div class="box-title">THÔNG TIN NGƯỜI DỰ THI</div>
             <form id="examForm" onsubmit="startExam(event)">
                 <div class="form-group">
                     <label for="fullname">Họ và tên</label>
                     <input type="text" id="fullname" placeholder="Nhập họ và tên" required>
                 </div>
-
                 <div class="form-group">
                     <label for="unit">Đơn vị</label>
-                    <input type="text" id="unit" placeholder="Nhập đơn vị" required>
+                    <select id="unit" required>
+                        <option value="" disabled selected>-- Chọn đơn vị --</option>
+                        <option value="Tổ Tham mưu">Tổ Tham mưu</option>
+                        <option value="Tổ Chính trị">Tổ Chính trị</option>
+                        <option value="Tổ Hậu cần">Tổ Hậu cần</option>
+                        <option value="Đại đội 1">Đại đội 1</option>
+                        <option value="Đại đội 2">Đại đội 2</option>
+                        <option value="Đại đội 3">Đại đội 3</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+                    <input type="tel" id="phone" placeholder="Nhập số điện thoại (10-11 số)" pattern="[0-9]{10,11}" minlength="10" maxlength="11" title="Số điện thoại phải bao gồm 10 hoặc 11 chữ số" required>
                 </div>
-
                 <button type="submit" class="btn btn-start">BẮT ĐẦU THI</button>
-                <button type="button" class="btn btn-report" onclick="reportResult()">BÁO CÁO KẾT QUẢ</button>
             </form>
         </div>
-    </div>
 
-    <!-- Script xử lý logic cơ bản -->
+        <!-- MÀN HÌNH 2: LÀM BÀI THI -->
+        <div id="quiz-screen" class="box-wrapper hidden">
+            <div class="quiz-header">
+                <span id="question-counter">Câu 1 / 30</span>
+                <span id="candidate-name">Thí sinh: Nguyễn Văn A</span>
+            </div>
+            <div id="question-text" class="question-text">Nội dung câu hỏi...</div>
+            <div id="options-container"></div>
+            <button id="next-btn" class="btn btn-start" onclick="nextQuestion()" style="margin-top: 20px;">CÂU TIẾP THEO</button>
+        </div>
+
+        <!-- MÀN HÌNH 3: KẾT QUẢ -->
+        <div id="result-screen" class="box-wrapper hidden">
+            <div class="box-title">KẾT QUẢ BÀI THI</div>
+            <div class="result-score" id="final-score">0/30</div>
+            <div class="result-text" id="final-message">Chúc mừng bạn đã hoàn thành bài thi!</div>
+            <button class="btn btn-start" onclick="location.reload()">LÀM LẠI BÀI THI</button>
+        </div>
+
+    </div>
+    
     <script>
+        // ==========================================
+        // 1. NGÂN HÀNG CÂU HỎI
+        // ==========================================
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKxhW3dpW3DAtXlWNnWJX-ktspBV51kTDmbTpcEm49QOWcn95eCrg_w1RHEXz_0a2DIQ/exec";
+        const questionBank = [
+            {
+                question: "Thông tư số 62/2025/TT-BCA quy định về nội dung nào sau đây ?",
+                options: ["A. Hoạt động tuần tra, kiểm soát của Cảnh sát cơ động", "B. Hoạt động vũ trang canh gác bảo vệ mục tiêu của Cảnh sát cơ động", "C. Công tác huấn luyện của Cảnh sát cơ động", "D. Công tác nghiệp vụ cơ bản của lực lượng Cảnh sát nhân dân"],
+                correct: 1
+            },
+            {
+                question: "Theo Điều 2, đối tượng áp dụng của Thông tư bao gồm ?",
+                options: ["A. Chỉ cán bộ, chiến sĩ Cảnh sát cơ động", "B. Chỉ Công an các đơn vị, địa phương được giao nhiệm vụ bảo vệ mục tiêu", "C. Công an các đơn vị, địa phương; cán bộ, chiến sĩ Cảnh sát cơ động được giao nhiệm vụ và các cơ quan, đơn vị, lực lượng, tổ chức khác có liên quan", "D. Tất cả cán bộ, chiến sĩ Công an nhân dân"],
+                correct: 2
+            },
+            {
+                question: "Theo nguyên tắc tại Điều 3, hoạt động vũ trang canh gác bảo vệ mục tiêu phải bảo đảm ?",
+                options: ["A. Thường xuyên, liên tục 12/24 giờ", "B. Thường xuyên, liên tục 18/24 giờ", "C. Thường xuyên, liên tục 20/24 giờ", "D. Thường xuyên, liên tục 24/24 giờ"],
+                correct: 3
+            },
+            {
+                question: "Hoạt động vũ trang canh gác bảo vệ mục tiêu phải gắn với ?",
+                options: ["A. Công tác huấn luyện và xây dựng lực lượng", "B. Công tác bảo vệ an ninh quốc gia, bảo đảm trật tự, an toàn xã hội trên địa bàn", "C. Công tác quản lý hành chính về trật tự xã hội", "D. Công tác đối ngoại của Công an nhân dân"],
+                correct: 1
+            },
+            {
+                question: "Trong khi làm nhiệm vụ vũ trang canh gác bảo vệ mục tiêu, cán bộ, chiến sĩ phải ?",
+                options: ["A. Phục tùng tuyệt đối mệnh lệnh của người chỉ huy", "B. Chỉ chấp hành mệnh lệnh bằng văn bản", "C. Chỉ thực hiện nhiệm vụ khi có sự đồng ý của đồng đội", "D. Chủ động thay đổi nhiệm vụ khi thấy cần thiết"],
+                correct: 0
+            },
+            {
+                question: "Hành vi nào sau đây bị nghiêm cấm đối với cán bộ, chiến sĩ khi làm nhiệm vụ tại mục tiêu ?",
+                options: ["A. Ghi chép tình hình mục tiêu", "B. Tiếp xúc với người đến liên hệ công tác theo nhiệm vụ", "C. Sử dụng điện thoại di động, trừ trường hợp được cấp có thẩm quyền cho phép", "D. Báo cáo chỉ huy khi phát hiện hiện tượng nghi vấn"],
+                correct: 2
+            },
+            {
+                question: "Theo Điều 4, cán bộ, chiến sĩ được bố trí nơi ăn, ở, sinh hoạt trong khu vực mục tiêu phải ?",
+                options: ["A. Chỉ chấp hành nội quy của đơn vị", "B. Chỉ chấp hành quy định của cơ quan có mục tiêu bảo vệ", "C. Chấp hành nội quy đơn vị và nghiêm chỉnh thực hiện các quy định của cơ quan có mục tiêu bảo vệ về an ninh, trật tự, an toàn và các quy định khác", "D. Không phải chấp hành nội quy của cơ quan có mục tiêu bảo vệ"],
+                correct: 2
+            },
+            {
+                question: "Phương pháp vũ trang canh gác bảo vệ mục tiêu không bao gồm nội dung nào sau đây ?",
+                options: ["A. Vũ trang canh gác tại vọng gác và xung quanh khu vực mục tiêu", "B. Cơ động tuần tra kiểm soát bảo vệ mục tiêu", "C. Giám sát, bảo vệ bằng phương tiện, thiết bị kỹ thuật nghiệp vụ", "D. Tổ chức điều tra xét xử các vụ án xảy ra tại mục tiêu"],
+                correct: 3
+            },
+            {
+                question: "Các mục tiêu được giao vũ trang canh gác bảo vệ phải được tiến hành ?",
+                options: ["A. Điều tra cơ bản", "B. Điều tra hình sự", "C. Điều tra đặc biệt", "D. Điều tra hành chính"],
+                correct: 0
+            },
+            {
+                question: "Theo Điều 6, công tác nghiệp vụ cơ bản trong bảo vệ mục tiêu thực hiện theo ?",
+                options: ["A. Thông tư số 50/2022/TT-BCA", "B. Thông tư số 54/2022/TT-BCA", "C. Thông tư số 15/2025/TT-BCA", "D. Thông tư số 58/2024/TT-BCA"],
+                correct: 2
+            },
+            {
+                question: "Mỗi mục tiêu được giao bảo vệ phải xây dựng ?",
+                options: ["A. Ít nhất một phương án bảo vệ", "B. Ít nhất hai phương án bảo vệ", "C. Một phương án bảo vệ và một phương án dự phòng bắt buộc", "D. Một phương án tác chiến"],
+                correct: 0
+            },
+            {
+                question: "Đối với mục tiêu tiềm ẩn nguy cơ xảy ra khủng bố, tấn công, phá hoại vũ trang, bắt giữ con tin, bạo loạn phải ?",
+                options: ["A. Chỉ xây dựng phương án bảo vệ", "B. Xây dựng phương án tác chiến để xử lý các tình huống nêu trên", "C. Chờ khi xảy ra vụ việc mới xây dựng phương án", "D. Chỉ xây dựng phương án khi Bộ trưởng yêu cầu"],
+                correct: 1
+            },
+            {
+                question: "Cán bộ, chiến sĩ thực hiện nhiệm vụ vũ trang canh gác bảo vệ mục tiêu được trang bị vũ khí, công cụ hỗ trợ, thiết bị kỹ thuật nghiệp vụ, thông tin liên lạc do ?",
+                options: ["A. Người chỉ huy ca gác quyết định", "B. Cán bộ, chiến sĩ tự lựa chọn", "C. Cấp có thẩm quyền quyết định căn cứ vào đặc điểm, tình hình mục tiêu được giao bảo vệ", "D. Cơ quan có mục tiêu bảo vệ quyết định"],
+                correct: 2
+            },
+            {
+                question: "Một trong những nhiệm vụ của cán bộ, chiến sĩ tại mục tiêu chính trị, kinh tế, khoa học - kỹ thuật, văn hóa, xã hội là ?",
+                options: ["A. Tự quyết định việc xử lý mọi vụ việc xảy ra tại mục tiêu", "B. Kiểm soát người, phương tiện vào, ra, khỏi mục tiêu", "C. Cho phép mọi phương tiện ra vào mục tiêu", "D. Tiếp nhận và quản lý tài sản do người ngoài bàn giao"],
+                correct: 1
+            },
+            {
+                question: "Khi phát hiện có nghi vấn trong quá trình kiểm soát người, phương tiện vào, ra khỏi mục tiêu, cán bộ, chiến sĩ phải ?",
+                options: ["A. Tự ý giữ người trong mọi trường hợp", "B. Bỏ qua nếu chưa gây mất an toàn", "C. Kịp thời báo cáo chỉ huy đơn vị để có biện pháp xử lý", "D. Yêu cầu người đó tự giải trình rồi cho vào mục tiêu"],
+                correct: 2
+            },
+            {
+                question: "Khi phát hiện người có hành vi cố tình xâm nhập mục tiêu, phá hoại, tấn công vũ trang, bắt giữ con tin hoặc đặt vật lạ có nghi vấn, cán bộ, chiến sĩ phải ?",
+                options: ["A. Chỉ ghi nhận và báo cáo", "B. Bắt và lập biên bản; đồng thời báo cáo chỉ huy và chuyển giao cơ quan có thẩm quyền giải quyết", "C. Tự mình điều tra vụ việc", "D. Chờ lực lượng khác đến rồi mới xử lý"],
+                correct: 1
+            },
+            {
+                question: "Khi bắt người phạm tội quả tang hoặc người có lệnh truy nã tại khu vực mục tiêu, cán bộ, chiến sĩ phải ?",
+                options: ["A. Lập biên bản, thu giữ công cụ, phương tiện được sử dụng để thực hiện tội phạm và bàn giao cho Công an sở tại", "B. Chỉ lập biên bản rồi cho người đó rời đi", "C. Bàn giao trực tiếp cho cơ quan có mục tiêu bảo vệ", "D. Tự mình xử lý vụ việc đến khi kết thúc"],
+                correct: 0
+            },
+            {
+                question: "Đối với tai nạn xảy ra ngoài khu vực mục tiêu, gần vọng gác, cán bộ, chiến sĩ phải ?",
+                options: ["A. Không can thiệp vì nằm ngoài mục tiêu", "B. Gọi cứu thương, đồng thời đề nghị Nhân dân hỗ trợ sơ cứu, bảo vệ hiện trường và thông báo Công an sở tại", "C. Chỉ báo cáo chỉ huy, không thực hiện việc khác", "D. Đưa người bị nạn vào mục tiêu bảo vệ"],
+                correct: 1
+            },
+            {
+                question: "Khi nhân viên cơ quan đại diện nước ngoài tại Việt Nam bàn giao người, phương tiện, tài sản, tài liệu, đồ vật, cán bộ, chiến sĩ làm nhiệm vụ ?",
+                options: ["A. Được nhận và tự xử lý", "B. Không được nhận, hướng dẫn họ đưa đến Công an nơi gần nhất để giải quyết", "C. Phải đưa toàn bộ vào khu vực mục tiêu", "D. Chỉ nhận tài liệu, không nhận tài sản"],
+                correct: 1
+            },
+            {
+                question: "Khi cơ quan đại diện nước ngoài tại Việt Nam yêu cầu trao đổi về biện pháp bảo đảm an ninh, an toàn mục tiêu, số lượng người trực tiếp làm việc tối thiểu là ?",
+                options: ["A. 01 người", "B. 02 người", "C. 03 người", "D. 04 người"],
+                correct: 1
+            },
+            {
+                question: "Nhiệm vụ nào sau đây thuộc trách nhiệm của cán bộ đốc gác ?",
+                options: ["A. Chỉ huy toàn bộ đơn vị bảo vệ mục tiêu", "B. Gọi gác, kiểm tra vũ khí, công cụ hỗ trợ, phương tiện nghiệp vụ và tổ chức giao nhiệm vụ", "C. Tự quyết định thay đổi phương án bảo vệ đã được phê duyệt", "D. Quyết định điều động lực lượng cấp tỉnh"],
+                correct: 1
+            },
+            {
+                question: "Cán bộ đốc gác phải thường xuyên ?",
+                options: ["A. Rời khỏi khu vực mục tiêu để kiểm tra bên ngoài", "B. Lưu động kiểm tra, đôn đốc cán bộ, chiến sĩ gác chấp hành quy định canh gác", "C. Thay thế toàn bộ cán bộ, chiến sĩ gác", "D. Chỉ kiểm tra khi có vụ việc xảy ra"],
+                correct: 1
+            },
+            {
+                question: "Mỗi ca gác tại vọng gác ?",
+                options: ["A. Không quá 01 giờ", "B. Không quá 02 giờ", "C. Không quá 03 giờ", "D. Không quá 04 giờ"],
+                correct: 3
+            },
+            {
+                question: "Theo Điều 11, mỗi cán bộ, chiến sĩ không được gác quá ?",
+                options: ["A. 02 ca trong một ngày", "B. 03 ca trong một ngày", "C. 04 ca trong một ngày", "D. 05 ca trong một ngày"],
+                correct: 1
+            },
+            {
+                question: "Đội hình tuần tra kiểm soát bảo vệ mục tiêu phải có ?",
+                options: ["A. Ít nhất 01 người", "B. Ít nhất 02 người", "C. Ít nhất 03 người", "D. Ít nhất 04 người"],
+                correct: 1
+            },
+            {
+                question: "Khi tiến hành tuần tra kiểm soát bảo vệ mục tiêu phải ?",
+                options: ["A. Tuần tra theo một quy luật cố định để dễ quản lý", "B. Đảm bảo yếu tố bí mật, bất ngờ, không tuần tra kiểm soát theo quy luật", "C. Chỉ tuần tra vào ban ngày", "D. Chỉ tuần tra khi có yêu cầu của cơ quan bảo vệ mục tiêu"],
+                correct: 1
+            },
+            {
+                question: "Đối với tình huống đơn giản, ít phức tạp xảy ra tại mục tiêu ?",
+                options: ["A. Cán bộ, chiến sĩ gác trực tiếp giải quyết; chỉ huy đơn vị, cán bộ đốc gác chỉ huy giải quyết theo quy định", "B. Chỉ Tư lệnh Cảnh sát cơ động được giải quyết", "C. Phải báo cáo Bộ trưởng trước khi xử lý", "D. Không được trực tiếp giải quyết"],
+                correct: 0
+            },
+            {
+                question: "Khi xảy ra tình huống đặc biệt nghiêm trọng như bạo loạn, phá hoại vũ trang, bắt giữ con tin, ai trực tiếp chỉ đạo việc huy động lực lượng, phương tiện tham gia giải quyết tại mục tiêu do đơn vị mình bố trí lực lượng bảo vệ ?",
+                options: ["A. Cán bộ đốc gác", "B. Chỉ huy ca gác", "C. Tư lệnh Cảnh sát cơ động hoặc Giám đốc Công an cấp tỉnh", "D. Cán bộ phụ trách mục tiêu"],
+                correct: 2
+            },
+            {
+                question: "Theo chế độ báo cáo, đơn vị thực hiện nhiệm vụ bảo vệ mục tiêu phải báo cáo định kỳ ?",
+                options: ["A. Ngày, tuần, tháng", "B. Tuần, tháng, quý, sáu tháng, 01 năm", "C. Tháng, quý, 01 năm", "D. Quý, sáu tháng, 01 năm"],
+                correct: 1
+            },
+            {
+                question: "Thông tư số 62/2025/TT-BCA có hiệu lực thi hành kể từ ngày nào ?",
+                options: ["A. 11/7/2025", "B. 01/8/2025", "C. 02/9/2025", "D. 01/10/2025"],
+                correct: 2
+            }
+        ];
+
+        // ==========================================
+        // 2. LOGIC XỬ LÝ BÀI THI
+        // ==========================================
+        
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        const TOTAL_QUESTIONS = 30;
+        let isAnswered = false;
+
+        // Hàm trộn mảng ngẫu nhiên (Fisher-Yates)
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        // Bắt đầu thi
         function startExam(event) {
-            event.preventDefault(); // Ngăn chặn load lại trang
+            event.preventDefault();
             
-            // Lấy dữ liệu người dùng nhập
             const name = document.getElementById('fullname').value;
             const unit = document.getElementById('unit').value;
             const phone = document.getElementById('phone').value;
 
-            // Hiển thị thông báo (Trong thực tế bạn sẽ chuyển hướng sang trang làm bài thi)
-            alert(`Xin chào thí sinh: ${name}\nĐơn vị: ${unit}\nSĐT: ${phone}\n\nHệ thống đang chuẩn bị đề thi...`);
-            
-            // Ví dụ: window.location.href = "trang_lam_bai.html";
+            const phoneRegex = /^[0-9]{10,11}$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Lỗi: Số điện thoại không hợp lệ!\nVui lòng chỉ nhập số và có độ dài từ 10 đến 11 chữ số.");
+                return;
+            }
+
+            document.getElementById('candidate-name').innerText = "Thí sinh: " + name + " (" + unit + ")";
+
+            let shuffledBank = shuffleArray([...questionBank]); 
+            const numQuestions = Math.min(TOTAL_QUESTIONS, shuffledBank.length);
+            currentQuiz = shuffledBank.slice(0, numQuestions);
+
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentQuiz.length).fill(null);
+            loadQuestion();
         }
 
-        function reportResult() {
-            alert("Chức năng báo cáo kết quả đang được xây dựng!");
+        // Tải câu hỏi lên màn hình
+        function loadQuestion() {
+            const questionData = currentQuiz[currentQuestionIndex];
+            isAnswered = false; 
+            
+            // Khôi phục nút bấm (chỉ khai báo 1 lần duy nhất ở đây)
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = false;
+            nextBtn.style.opacity = '1';
+            nextBtn.style.cursor = 'pointer';
+            
+            document.getElementById('question-counter').innerText = `Câu ${currentQuestionIndex + 1} / ${currentQuiz.length}`;
+            document.getElementById('question-text').innerText = questionData.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = ''; 
+            
+            questionData.options.forEach((option, index) => {
+                const isSelected = userAnswers[currentQuestionIndex] === index;
+                const label = document.createElement('label');
+                label.className = `option-label ${isSelected ? 'selected' : ''}`;
+                
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'answer';
+                radio.value = index;
+                radio.checked = isSelected;
+                radio.onchange = () => selectAnswer(index);
+                
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(option));
+                optionsContainer.appendChild(label);
+            });
+
+            // Đổi chữ nút phù hợp (không khai báo lại biến nextBtn)
+            if (currentQuestionIndex === currentQuiz.length - 1) {
+                nextBtn.innerText = "NỘP BÀI THI";
+            } else {
+                nextBtn.innerText = "CÂU TIẾP THEO";
+            }
+        }
+
+        // Lưu đáp án người dùng chọn (Chỉ giữ lại 1 hàm duy nhất)
+        function selectAnswer(optionIndex) {
+            if (isAnswered) return; // Nếu đã trả lời rồi thì không cho đổi
+            userAnswers[currentQuestionIndex] = optionIndex;
+            
+            const labels = document.querySelectorAll('.option-label');
+            labels.forEach((label, index) => {
+                if (index === optionIndex) {
+                    label.classList.add('selected');
+                } else {
+                    label.classList.remove('selected');
+                }
+            });
+        }
+
+        // Xử lý khi bấm "Câu tiếp theo" hoặc "Nộp bài"
+        function nextQuestion() {
+            if (userAnswers[currentQuestionIndex] === null) {
+                alert("Vui lòng chọn một đáp án trước khi sang câu tiếp theo!");
+                return;
+            }
+
+            if (isAnswered) return;
+
+            const nextBtn = document.getElementById('next-btn');
+            const questionData = currentQuiz[currentQuestionIndex];
+            const selectedAnswer = userAnswers[currentQuestionIndex];
+            const correctAnswer = questionData.correct;
+
+            isAnswered = true;
+
+            const labels = document.querySelectorAll('.option-label');
+            labels.forEach((label, index) => {
+                label.classList.add('locked');
+                label.querySelector('input').disabled = true;
+                label.classList.remove('selected');
+
+                if (index === correctAnswer) {
+                    label.classList.add('correct-answer');
+                }
+                if (index === selectedAnswer && selectedAnswer !== correctAnswer) {
+                    label.classList.add('wrong-answer');
+                }
+            });
+
+            nextBtn.disabled = true;
+            nextBtn.style.opacity = '0.7';
+            nextBtn.style.cursor = 'not-allowed';
+            
+            const isLastQuestion = (currentQuestionIndex === currentQuiz.length - 1);
+            nextBtn.innerText = isLastQuestion ? "ĐANG CHẤM ĐIỂM..." : "ĐANG CHUYỂN CÂU...";
+
+            setTimeout(() => {
+                nextBtn.disabled = false;
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+
+                if (!isLastQuestion) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                } else {
+                    submitExam();
+                }
+            }, 500);
+        }
+
+                // Chấm điểm và hiển thị kết quả
+        function submitExam() {
+            let score = 0;
+            for (let i = 0; i < currentQuiz.length; i++) {
+                if (userAnswers[i] === currentQuiz[i].correct) {
+                    score++;
+                }
+            }
+
+            // Lấy lại thông tin thí sinh đã nhập
+            const name = document.getElementById('fullname').value;
+            const unit = document.getElementById('unit').value;
+            const phone = document.getElementById('phone').value;
+            const percentage = Math.round((score / currentQuiz.length) * 100);
+
+            // === GỬI KẾT QUẢ LÊN GOOGLE SHEETS ===
+            const resultData = {
+                name: name,
+                unit: unit,
+                phone: phone,
+                score: score,
+                total: currentQuiz.length,
+                percentage: percentage
+            };
+
+            // Gửi dữ liệu (dùng fetch với chế độ no-cors để tránh lỗi CORS)
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(resultData)
+            }).then(() => {
+                console.log("Đã gửi kết quả lên Google Sheets thành công!");
+            }).catch((error) => {
+                console.error("Lỗi khi gửi kết quả:", error);
+            });
+            // ======================================
+
+            // Ẩn màn hình làm bài, hiện màn hình kết quả
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = `${score} / ${currentQuiz.length}`;
+            
+            let message = "";
+            if (percentage >= 80) message = "Xuất sắc! Bạn đã hoàn thành rất tốt.";
+            else if (percentage >= 50) message = "Khá tốt! Hãy cố gắng thêm ở lần sau.";
+            else message = "Cần cố gắng nhiều hơn. Hãy ôn tập lại nhé!";
+            
+            document.getElementById('final-message').innerText = message;
         }
     </script>
 </body>
