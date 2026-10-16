@@ -67,6 +67,22 @@
             color: #ffcc00; font-size: 16px; font-weight: bold; background: rgba(255, 204, 0, 0.1);
             padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255, 204, 0, 0.2);
         }
+         /* Đồng hồ đếm thời gian */
+        #timer {
+            color: #ffffff !important;
+            background: rgba(220, 53, 69, 0.3) !important;
+            border: 1px solid #dc3545 !important;
+            font-family: 'Courier New', monospace;
+            font-size: 18px !important;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
         
         .question-text { font-size: 19px; line-height: 1.6; margin-bottom: 25px; color: #e0e0e0; font-weight: 500; }
         
@@ -163,6 +179,7 @@
         <div id="quiz-screen" class="box-wrapper hidden">
             <div class="quiz-header">
                 <span id="question-counter">Câu 1 / 30</span>
+                <span id="timer">00:00</span>
                 <span id="candidate-name">Thí sinh: Nguyễn Văn A</span>
             </div>
             <div id="question-text" class="question-text">Nội dung câu hỏi...</div>
@@ -184,7 +201,7 @@
         // ==========================================
         // 1. NGÂN HÀNG CÂU HỎI
         // ==========================================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkE_aIGcjYwjyTe-PgjL0I34f7FCMbsTICxPrL-bbPhV68VbOxq0oYk_nsHlUxzrd0lw/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxgKSM4v4Ly_h05cHgUdXr78sWPsT-bEUlQnZjXig6cC68Ns3wlkLRjIwBMRtbqa60f1Q/exec";
         const questionBank = [
             {
                 question: "Thông tư số 62/2025/TT-BCA quy định về nội dung nào sau đây ?",
@@ -347,7 +364,9 @@
         let userAnswers = [];
         const TOTAL_QUESTIONS = 30;
         let isAnswered = false;
-
+            let timerInterval = null;      // <-- THÊM: Lưu ID của bộ đếm
+        let secondsElapsed = 0;        // <-- THÊM: Số giây đã trôi qua
+        let totalTimeUsed = "00:00";   // <-- THÊM: Lưu thời gian hoàn thành
         // Hàm trộn mảng ngẫu nhiên (Fisher-Yates)
         function shuffleArray(array) {
             let currentIndex = array.length, randomIndex;
@@ -358,7 +377,34 @@
             }
             return array;
         }
+                // Bắt đầu chạy đồng hồ
+        function startTimer() {
+            secondsElapsed = 0;
+            document.getElementById('timer').innerText = "00:00";
+            
+            // Xóa đồng hồ cũ nếu có
+            if (timerInterval) clearInterval(timerInterval);
+            
+            // Cứ mỗi 1 giây thì tăng lên 1
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                const minutes = Math.floor(secondsElapsed / 60);
+                const seconds = secondsElapsed % 60;
+                document.getElementById('timer').innerText = 
+                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
 
+        // Dừng đồng hồ
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            const minutes = Math.floor(secondsElapsed / 60);
+            const seconds = secondsElapsed % 60;
+            totalTimeUsed = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
         // Bắt đầu thi
         function startExam(event) {
             event.preventDefault();
@@ -385,6 +431,8 @@
             currentQuestionIndex = 0;
             userAnswers = new Array(currentQuiz.length).fill(null);
             loadQuestion();
+
+            startTimer(); // <-- THÊM DÒNG NÀY ĐỂ BẮT ĐẦU ĐẾM
         }
 
         // Tải câu hỏi lên màn hình
@@ -496,7 +544,11 @@
         }
 
                 // Chấm điểm và hiển thị kết quả
+                // Chấm điểm và hiển thị kết quả
         function submitExam() {
+            // Dừng đồng hồ đếm thời gian
+            stopTimer();
+            
             let score = 0;
             for (let i = 0; i < currentQuiz.length; i++) {
                 if (userAnswers[i] === currentQuiz[i].correct) {
@@ -517,10 +569,10 @@
                 phone: phone,
                 score: score,
                 total: currentQuiz.length,
-                percentage: percentage
+                percentage: percentage,
+                timeUsed: totalTimeUsed // <-- Gửi thêm thời gian làm bài
             };
 
-            // Gửi dữ liệu (dùng fetch với chế độ no-cors để tránh lỗi CORS)
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -539,13 +591,16 @@
 
             document.getElementById('final-score').innerText = `${score} / ${currentQuiz.length}`;
             
+            const percentageEval = (score / currentQuiz.length) * 100;
             let message = "";
-            if (percentage >= 80) message = "Xuất sắc! Bạn đã hoàn thành rất tốt.";
-            else if (percentage >= 50) message = "Khá tốt! Hãy cố gắng thêm ở lần sau.";
+            if (percentageEval >= 80) message = "Xuất sắc! Bạn đã hoàn thành rất tốt.";
+            else if (percentageEval >= 50) message = "Khá tốt! Hãy cố gắng thêm ở lần sau.";
             else message = "Cần cố gắng nhiều hơn. Hãy ôn tập lại nhé!";
             
+            // Hiển thị lời chúc mừng kèm tên đồng chí và thời gian hoàn thành
             document.getElementById('final-message').innerHTML = 
-                `Chúc mừng Đồng chí <strong style="color: #ffcc00; font-size: 22px;">${name}</strong> đã hoàn thành bài thi!<br><br>` +
+                `Chúc mừng Đồng chí <strong style="color: #ffcc00; font-size: 22px;">${name}</strong> đã hoàn thành bài thi!<br>` +
+                `<span style="color: #ffcc00;">⏱ Thời gian làm bài: <strong>${totalTimeUsed}</strong></span><br><br>` +
                 `<span style="color: #e0e0e0;">${message}</span>`;
         }
     </script>
